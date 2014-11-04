@@ -46,7 +46,6 @@ extern "C" {
 		EXTERN_API_C( OSStatus ) QTPixelBufferContextCreate( CFAllocatorRef, CFDictionaryRef, QTVisualContextRef* );
 	}
 
-
 	enum CVPixelBufferLockFlags {
 		kCVPixelBufferLock_ReadOnly = 0x00000001,
 	};
@@ -259,8 +258,8 @@ namespace cinder { namespace qtime {
 				format.wrap( GL_CLAMP_TO_EDGE ).magFilter( GL_LINEAR ).minFilter( GL_LINEAR ).internalFormat( internalFormat ).pixelDataType( GL_UNSIGNED_INT_8_8_8_8_REV ).pixelDataFormat( GL_BGRA );
 				mTexture = gl::Texture::create( backingWidth, backingHeight, format );
 //				mTexture = gl::TextureRef( new gl::Texture( backingWidth, backingHeight, format ), std::bind( CVOpenGLTextureDealloc, std::placeholders::_1, cvImage ) );
-				mTexture->setCleanTexCoords( width/(float)backingWidth, height/(float)backingHeight );
-				mTexture->setFlipped( false );
+				//BL mTexture->setCleanTexCoords( width/(float)backingWidth, height/(float)backingHeight );
+				//BL mTexture->setFlipped( false );
 				
 				CI_LOG_I( "Created texture." );
 				
@@ -326,7 +325,7 @@ namespace cinder { namespace qtime {
 				float ch = mObj->mTexture->getCleanHeight();
 				float w = mObj->mTexture->getWidth();
 				float h = mObj->mTexture->getHeight();
-				gl::drawSolidRect( centeredRect, Rectf(0, 0, cw/w, ch/h) );
+				gl::drawSolidRect(centeredRect); //BL  , Rectf(0, 0, cw / w, ch / h) );
 			};
 			
 			if( isHapQ() ) {
